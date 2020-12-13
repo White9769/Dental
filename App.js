@@ -12,7 +12,8 @@ import {
     PatientScreen,
     AddPatientScreen,
     AddAppointmentScreen,
-    PatientsScreen
+    PatientsScreen,
+    EditPatientScreen,
 } from './screens';
 
 const AppNavigator = createStackNavigator(
@@ -25,6 +26,9 @@ const AppNavigator = createStackNavigator(
         },
         AddPatient: {
             screen: AddPatientScreen
+        },
+        EditPatient: {
+            screen: EditPatientScreen
         },
         AddAppointment: {
             screen: AddAppointmentScreen

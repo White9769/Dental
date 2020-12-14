@@ -40,9 +40,7 @@ const PatientsScreen = props => {
         'Вы действительно хотите удалить прием?',
         [
           {
-            text: 'Отмена',
-            onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel'
+            text: 'Отмена'
           },
           {
             text: 'Удалить',

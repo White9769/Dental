@@ -21,6 +21,7 @@ const EditAppointmentScreen = ({ navigation }) => {
     const appointmentId = navigation.getParam('appointmentId');
 
     const fetchAppointmentInfo = useCallback(async () => {
+        console.log(appointmentId);
         const { data } = await appointmentsApi.getById({id: appointmentId});
         setValues(data.data);
         return data;
@@ -29,6 +30,10 @@ const EditAppointmentScreen = ({ navigation }) => {
     useEffect(() => {
         fetchAppointmentInfo();
     }, []);
+
+    useEffect(() => {
+        fetchAppointmentInfo();
+    }, [navigation.state])
 
     const setFieldValue = (name, value) => {
         setValues({

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {FlatList, Alert, View, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
@@ -14,7 +14,7 @@ const PatientsScreen =  props => {
     const [searchValue, setSearchValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-  const fetchPatients = () => {
+  const fetchPatients = useCallback(() => {
     setIsLoading(true);
     patientsApi
         .get()
@@ -24,12 +24,10 @@ const PatientsScreen =  props => {
         .finally(e => {
           setIsLoading(false);
         });
-  };
+  }, [setData]);
 
 
   useEffect(fetchPatients, []);
-
-  useEffect(fetchPatients, [navigation.state.params]);
 
   const onSearch = e => {
     setSearchValue(e.nativeEvent.text);

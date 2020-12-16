@@ -33,12 +33,12 @@ const EditPatientScreen = ({ navigation }) => {
         patientsApi
             .update({id: patientId, values})
             .then(() => {
-                navigation.navigate('Patients');
+                navigation.push('Patients');
             })
             .catch(e => {
                 alert('BAD');
             });
-    }, [patientId, values]);
+    }, [navigation, patientId, values]);
 
     return (
         <Container>

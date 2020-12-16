@@ -33,12 +33,12 @@ const EditPatientScreen = ({ navigation }) => {
         patientsApi
             .update({id: patientId, values})
             .then(() => {
-                navigation.navigate('Patients');
+                navigation.push('Patients');
             })
             .catch(e => {
                 alert('BAD');
             });
-    }, [patientId, values]);
+    }, [navigation, patientId, values]);
 
     return (
         <Container>
@@ -76,7 +76,7 @@ const ButtonView = styled.View`
 `;
 
 EditPatientScreen.navigationOptions = {
-    title: 'Редактирование',
+    title: 'Редактировать пациента',
     headerTintColor: '#2A86FF',
     headerStyle: {
         elevation: 0.8,

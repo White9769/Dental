@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View, ActivityIndicator, Linking, SectionList, Alert } from 'react-native';
+import {ScrollView, Text, View, ActivityIndicator, Linking, SectionList, Alert, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import { Foundation, Ionicons } from '@expo/vector-icons';
 import Swipeable from 'react-native-swipeable-row';
@@ -13,13 +13,15 @@ import {
     PlusButton
 } from '../components';
 
+import { appointmentsApi } from '../utils/api';
 import { patientsApi, phoneFormat } from '../utils';
 
 const PatientScreen = ({ navigation }) => {
     const [appointments, setAppointments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
+
+    const fetchAppointments = () => {
         const id = navigation.getParam('patient')._id;
         patientsApi
             .show(id)
@@ -30,9 +32,12 @@ const PatientScreen = ({ navigation }) => {
             .catch(() => {
                 setIsLoading(false);
             });
-    }, []);
+    };
+    useEffect(fetchAppointments, []);
 
-    /*const removeAppointment = id => {
+    useEffect(fetchAppointments, [navigation.state.params]);
+
+    const removeAppointment = id => {
         Alert.alert(
             'Удаление приема',
             'Вы действительно хотите удалить прием?',
@@ -47,6 +52,9 @@ const PatientScreen = ({ navigation }) => {
                         setIsLoading(true);
                         appointmentsApi
                             .remove(id)
+                            .then(() => {
+                                fetchAppointments()
+                            })
                             .catch(() => {
                                 setIsLoading(false);
                             });
@@ -55,7 +63,7 @@ const PatientScreen = ({ navigation }) => {
             ],
             { cancelable: false }
         );
-    };*/
+    };
 
 
     return (
@@ -70,7 +78,7 @@ const PatientScreen = ({ navigation }) => {
 
                 <PatientButtons>
                     <FormulaButtonView>
-                        <Button>Формула зубов</Button>
+                        <Button  onPress={navigation.navigate.bind(this, 'DentalSnapshot')}>Снимки зубов</Button>
                     </FormulaButtonView>
                     <PhoneButtonView>
                         <Button
@@ -96,11 +104,16 @@ const PatientScreen = ({ navigation }) => {
                         appointments.map(appointment => (
                             <Swipeable
                                 rightButtons={[
-                                    <SwipeViewButton style={{ backgroundColor: '#B4C1CB' }}>
+                                    <SwipeViewButton
+                                        /*onPress={navigation.navigate.bind(this, 'EditAppointment', {
+                                            appointmentId: navigation.getParam('appointment', {})._id
+                                        })}*/
+                                        style={{ backgroundColor: '#B4C1CB' }}
+                                    >
                                         <Ionicons name="md-create" size={28} color="white" />
                                     </SwipeViewButton>,
                                     <SwipeViewButton
-                                        //onPress={removeAppointment.bind(this, item._id)}
+                                        onPress={removeAppointment.bind(this, appointment._id)}
                                         style={{ backgroundColor: '#F85A5A' }}
                                     >
                                         <Ionicons name="ios-close" size={48} color="white" />
@@ -156,6 +169,23 @@ const PatientScreen = ({ navigation }) => {
         </View>
     );
 };
+
+PatientScreen.navigationOptions = ({ navigation }) => ({
+    title: 'Карта пациента',
+    headerTintColor: '#2A86FF',
+    headerStyle: {
+        elevation: 0.8,
+        shadowOpacity: 0.8
+    },
+    headerRight: () => (
+        <TouchableOpacity
+            onPress={navigation.navigate.bind(this, 'Home')}
+            style={{ marginRight: 20 }}
+        >
+            <Ionicons name="md-home" size={28} color="black" />
+        </TouchableOpacity>
+    )
+});
 
 const AppointmentCardLabel = styled.Text`
   font-size: 16px;
@@ -219,13 +249,5 @@ const SwipeViewButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-PatientScreen.navigationOptions = {
-    title: 'Карта пациента',
-    headerTintColor: '#2A86FF',
-    headerStyle: {
-        elevation: 0.8,
-        shadowOpacity: 0.8
-    }
-};
 
 export default PatientScreen;

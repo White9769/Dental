@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Text } from 'react-native';
 import { Item, Input, Label } from 'native-base';
 import styled from 'styled-components';
+import fetchPatients from '../screens/PatientsScreen'
 
 import { patientsApi } from '../utils/api';
 
@@ -18,16 +19,16 @@ const AddPatientScreen = ({ navigation }) => {
     });
   };
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     patientsApi
         .add(values)
         .then(() => {
-          navigation.navigate('Patients');
+            navigation.push('Patients')
         })
         .catch(e => {
           alert('BAD');
         });
-  };
+  }, [navigation, values]);
 
   return (
       <Container>

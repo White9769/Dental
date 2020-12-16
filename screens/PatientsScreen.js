@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FlatList, Alert, View } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import {FlatList, Alert, View, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import Swipeable from 'react-native-swipeable-row';
@@ -8,13 +8,13 @@ import { Appointment, SectionTitle, PlusButton } from '../components';
 import { patientsApi, phoneFormat } from '../utils';
 
 
-const PatientsScreen = props => {
-  const { navigation } = props;
-  const [data, setData] = useState(null);
-  const [searchValue, setSearchValue] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+const PatientsScreen =  props => {
+    const { navigation } = props;
+    const [data, setData] = useState(null);
+    const [searchValue, setSearchValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-  const fetchPatients = () => {
+  const fetchPatients = useCallback(() => {
     setIsLoading(true);
     patientsApi
         .get()
@@ -24,11 +24,10 @@ const PatientsScreen = props => {
         .finally(e => {
           setIsLoading(false);
         });
-  };
+  }, [setData]);
+
 
   useEffect(fetchPatients, []);
-
-  useEffect(fetchPatients, [navigation.state.params]);
 
   const onSearch = e => {
     setSearchValue(e.nativeEvent.text);
@@ -40,9 +39,7 @@ const PatientsScreen = props => {
         'Вы действительно хотите удалить прием?',
         [
           {
-            text: 'Отмена',
-            onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel'
+            text: 'Отмена'
           },
           {
             text: 'Удалить',
@@ -118,14 +115,22 @@ const PatientsScreen = props => {
   );
 };
 
-PatientsScreen.navigationOptions = {
+PatientsScreen.navigationOptions = ({ navigation }) => ({
   title: 'Пациенты',
   headerTintColor: '#2A86FF',
   headerStyle: {
     elevation: 0.8,
     shadowOpacity: 0.8
-  }
-};
+  },
+    headerRight: () => (
+    <TouchableOpacity
+        onPress={navigation.navigate.bind(this, 'Home')}
+        style={{ marginRight: 20 }}
+    >
+        <Ionicons name="md-home" size={28} color="black" />
+    </TouchableOpacity>
+    )
+});
 
 const SwipeViewButton = styled.TouchableOpacity`
   width: 75px;

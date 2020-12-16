@@ -43,7 +43,7 @@ const AddAppointmentScreen = ({ navigation }) => {
     appointmentsApi
         .add(values)
         .then(() => {
-          navigation.navigate('Patient', { lastUpdate: new Date() });
+          navigation.navigate('Home', { lastUpdate: new Date() });
         })
         .catch(e => {
           if (e.response.data && e.response.data.message) {
@@ -86,10 +86,19 @@ const AddAppointmentScreen = ({ navigation }) => {
               onValueChange={setFieldValue.bind(this, 'diagnosis')}
               selectedValue={values.diagnosis}
           >
-              <Picker.Item label="Выберите диагноз:" />
-            <Picker.Item label="пульпит" value="пульпит" />
+              <Picker.Item label="Выберите услугу:" />
+            <Picker.Item label="лучение пульпита" value="лучение пульпита" />
             <Picker.Item label="удаление зуба" value="удаление зуба" />
-            <Picker.Item label="спид" value="спид" />
+            <Picker.Item label="лечение кариеса" value="лечение кариеса" />
+            <Picker.Item label="пломбирование зуба" value="пломбирование зуба" />
+            <Picker.Item label="наращивание зуба" value="наращивание зуба" />
+            <Picker.Item label="удаление зубных отложений" value="удаление зубных отложений" />
+            <Picker.Item label="герметизация фиссур зуба" value="герметизация фиссур зуба" />
+            <Picker.Item label="шинирование зуба" value="шинирование зуба" />
+            <Picker.Item label="распломбировка корневого канала" value="распломбировка корневого канала" />
+            <Picker.Item label="резекция верхушки корня зуба" value="резекция верхушки корня зуба" />
+            <Picker.Item label="имплантация зуба" value="имплантация зуба" />
+
           </Picker>
         </Item>
         <Item style={{ marginTop: 20, marginLeft: 0 }}>

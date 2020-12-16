@@ -76,7 +76,7 @@ const ButtonView = styled.View`
 `;
 
 EditPatientScreen.navigationOptions = {
-    title: 'Редактирование',
+    title: 'Редактировать пациента',
     headerTintColor: '#2A86FF',
     headerStyle: {
         elevation: 0.8,

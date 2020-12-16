@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, Alert, View } from 'react-native';
+import {FlatList, Alert, View, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import Swipeable from 'react-native-swipeable-row';
@@ -8,11 +8,11 @@ import { Appointment, SectionTitle, PlusButton } from '../components';
 import { patientsApi, phoneFormat } from '../utils';
 
 
-const PatientsScreen = props => {
-  const { navigation } = props;
-  const [data, setData] = useState(null);
-  const [searchValue, setSearchValue] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+const PatientsScreen =  props => {
+    const { navigation } = props;
+    const [data, setData] = useState(null);
+    const [searchValue, setSearchValue] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
   const fetchPatients = () => {
     setIsLoading(true);
@@ -25,6 +25,7 @@ const PatientsScreen = props => {
           setIsLoading(false);
         });
   };
+
 
   useEffect(fetchPatients, []);
 
@@ -116,14 +117,22 @@ const PatientsScreen = props => {
   );
 };
 
-PatientsScreen.navigationOptions = {
+PatientsScreen.navigationOptions = ({ navigation }) => ({
   title: 'Пациенты',
   headerTintColor: '#2A86FF',
   headerStyle: {
     elevation: 0.8,
     shadowOpacity: 0.8
-  }
-};
+  },
+    headerRight: () => (
+    <TouchableOpacity
+        onPress={navigation.navigate.bind(this, 'Home')}
+        style={{ marginRight: 20 }}
+    >
+        <Ionicons name="md-home" size={28} color="black" />
+    </TouchableOpacity>
+    )
+});
 
 const SwipeViewButton = styled.TouchableOpacity`
   width: 75px;

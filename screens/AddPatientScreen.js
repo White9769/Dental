@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text } from 'react-native';
 import { Item, Input, Label } from 'native-base';
 import styled from 'styled-components';
+import fetchPatients from '../screens/PatientsScreen'
 
 import { patientsApi } from '../utils/api';
 
@@ -22,7 +23,7 @@ const AddPatientScreen = ({ navigation }) => {
     patientsApi
         .add(values)
         .then(() => {
-          navigation.navigate('Patients');
+            navigation.navigate('Patients')
         })
         .catch(e => {
           alert('BAD');

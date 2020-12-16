@@ -43,7 +43,7 @@ const AddAppointmentScreen = ({ navigation }) => {
     appointmentsApi
         .add(values)
         .then(() => {
-          navigation.navigate('Patient', { lastUpdate: new Date() });
+          navigation.navigate('Home', { lastUpdate: new Date() });
         })
         .catch(e => {
           if (e.response.data && e.response.data.message) {

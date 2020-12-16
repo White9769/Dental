@@ -2,10 +2,9 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-// TODO: Сделать редактирование пациентов и приемов.
-// TODO: Сделать popup для приема в карте пациента (удаление, редактирование).
-// TODO: Сделать экран "формулу зубов" и как-то показывать там снимки.
-// TODO: Сделать обновление в карте пациента после доавления приёма(Переделать PatientScreen.).
+// TODO: Сделать редактирование приемов.
+// TODO: Сделать автоматичское обновление после изменения или добавления пользвателя.
+
 
 import {
     HomeScreen,
@@ -15,6 +14,7 @@ import {
     PatientsScreen,
     EditPatientScreen,
     EditAppointmentScreen,
+    DentalSnapshotScreen,
 } from './screens';
 
 const AppNavigator = createStackNavigator(
@@ -39,7 +39,10 @@ const AppNavigator = createStackNavigator(
         },
         Patients: {
             screen: PatientsScreen
-        }
+        },
+        DentalSnapshot: {
+            screen: DentalSnapshotScreen
+        },
     },
     {
         initialRouteName: 'Home'

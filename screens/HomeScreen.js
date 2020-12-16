@@ -3,9 +3,9 @@ import { SectionList, Alert, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import Swipeable from 'react-native-swipeable-row';
-
 import { Appointment, SectionTitle, PlusButton } from '../components';
 import { appointmentsApi } from '../utils/api';
+
 
 const HomeScreen = props => {
   const { navigation } = props;
@@ -69,9 +69,9 @@ const HomeScreen = props => {
                     <Swipeable
                         rightButtons={[
                           <SwipeViewButton
-                              onPress={navigation.navigate.bind(this, 'EditAppointment', {
+                              /*onPress={navigation.navigate.bind(this, 'EditAppointment', {
                                   appointmentId: navigation.getParam('appointment', {})._id
-                              })}
+                              })}*/
                               style={{ backgroundColor: '#B4C1CB' }}>
                             <Ionicons name="md-create" size={28} color="white" />
                           </SwipeViewButton>,
@@ -103,7 +103,7 @@ HomeScreen.navigationOptions = ({ navigation }) => ({
     elevation: 0.8,
     shadowOpacity: 0.8
   },
-  headerRight: () => (
+    headerRight: () => (
       <TouchableOpacity
           onPress={navigation.navigate.bind(this, 'Patients')}
           style={{ marginRight: 20 }}

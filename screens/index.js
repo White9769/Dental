@@ -5,3 +5,4 @@ export { default as AddAppointmentScreen } from './AddAppointmentScreen';
 export { default as PatientsScreen } from './PatientsScreen';
 export { default as EditPatientScreen } from './EditPatientScreen';
 export { default as EditAppointmentScreen } from './EditAppointmentScreen';
+export { default as DentalSnapshotScreen } from './DentalsSnapshotScreen';

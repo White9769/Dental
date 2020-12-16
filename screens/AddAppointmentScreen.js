@@ -60,7 +60,7 @@ const AddAppointmentScreen = ({ navigation }) => {
         <Item style={{ marginLeft: 0 }} floatingLabel>
           <Label>Номер зуба</Label>
           <Input
-              onChange={handleInputChange.bind(this, 'dentNumber')}
+              onChange={handleInputChange.bind(this, 'fullname')}
               value={values.fullname}
               style={{ marginTop: 12 }}
               keyboardType="numeric"
@@ -70,7 +70,7 @@ const AddAppointmentScreen = ({ navigation }) => {
         <Item style={{ marginTop: 20, marginLeft: 0 }} floatingLabel>
           <Label>Цена</Label>
           <Input
-              onChange={handleInputChange.bind(this, 'price')}
+              onChange={handleInputChange.bind(this, 'phone')}
               value={values.phone}
               keyboardType="numeric"
               style={{ marginTop: 12 }}

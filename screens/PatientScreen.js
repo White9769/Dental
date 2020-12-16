@@ -102,61 +102,62 @@ const PatientScreen = ({ navigation }) => {
                         <ActivityIndicator size="large" color="#2A86FF" />
                     ) : (
                         appointments.map(appointment => (
-                            <Swipeable
-                                rightButtons={[
-                                    <SwipeViewButton
-                                        /*onPress={navigation.navigate.bind(this, 'EditAppointment', {
-                                            appointmentId: navigation.getParam('appointment', {})._id
-                                        })}*/
-                                        style={{ backgroundColor: '#B4C1CB' }}
-                                    >
-                                        <Ionicons name="md-create" size={28} color="white" />
-                                    </SwipeViewButton>,
-                                    <SwipeViewButton
-                                        onPress={removeAppointment.bind(this, appointment._id)}
-                                        style={{ backgroundColor: '#F85A5A' }}
-                                    >
-                                        <Ionicons name="ios-close" size={48} color="white" />
-                                    </SwipeViewButton>
-                                ]}
-                            >
-                                <AppointmentCard key={appointment._id}>
-                                    <AppointmentCardRow>
-                                        <Ionicons name="md-medical" size={16} color="#A3A3A3" />
-                                        <AppointmentCardLabel>
-                                            Зуб:{' '}
-                                            <Text style={{ fontWeight: '600' }}>
-                                                {appointment.dentNumber}
-                                            </Text>
-                                        </AppointmentCardLabel>
-                                    </AppointmentCardRow>
-                                    <AppointmentCardRow>
-                                        <Foundation
-                                            name="clipboard-notes"
-                                            size={16}
-                                            color="#A3A3A3"
-                                        />
-                                        <AppointmentCardLabel>
-                                            Диагноз:{' '}
-                                            <Text style={{ fontWeight: '600' }}>
-                                                {appointment.diagnosis}
-                                            </Text>
-                                        </AppointmentCardLabel>
-                                    </AppointmentCardRow>
-                                    <AppointmentCardRow
-                                        style={{ marginTop: 15, justifyContent: 'space-between' }}
-                                    >
-                                        <Badge style={{ width: 155 }} active>
-                                            {appointment.date
-                                                .split('-')
-                                                .reverse()
-                                                .join('-')} - {appointment.time}
-                                        </Badge>
-                                        <Badge color="green">{appointment.price} Р</Badge>
-                                    </AppointmentCardRow>
-                                </AppointmentCard>
-                            </Swipeable>
-                        ))
+                                <Swipeable
+                                    rightButtons={[
+                                        <SwipeViewButton
+                                            onPress={navigation.navigate.bind(this, 'EditAppointment', {
+                                                appointmentId: appointment?._id,
+                                            })}
+                                            style={{ backgroundColor: '#B4C1CB' }}
+                                        >
+                                            <Ionicons name="md-create" size={28} color="white" />
+                                        </SwipeViewButton>,
+                                        <SwipeViewButton
+                                            onPress={removeAppointment.bind(this, appointment._id)}
+                                            style={{ backgroundColor: '#F85A5A' }}
+                                        >
+                                            <Ionicons name="ios-close" size={48} color="white" />
+                                        </SwipeViewButton>
+                                    ]}
+                                >
+                                    <AppointmentCard key={appointment._id}>
+                                        <AppointmentCardRow>
+                                            <Ionicons name="md-medical" size={16} color="#A3A3A3" />
+                                            <AppointmentCardLabel>
+                                                Зуб:{' '}
+                                                <Text style={{ fontWeight: '600' }}>
+                                                    {appointment.dentNumber}
+                                                </Text>
+                                            </AppointmentCardLabel>
+                                        </AppointmentCardRow>
+                                        <AppointmentCardRow>
+                                            <Foundation
+                                                name="clipboard-notes"
+                                                size={16}
+                                                color="#A3A3A3"
+                                            />
+                                            <AppointmentCardLabel>
+                                                Диагноз:{' '}
+                                                <Text style={{ fontWeight: '600' }}>
+                                                    {appointment.diagnosis}
+                                                </Text>
+                                            </AppointmentCardLabel>
+                                        </AppointmentCardRow>
+                                        <AppointmentCardRow
+                                            style={{ marginTop: 15, justifyContent: 'space-between' }}
+                                        >
+                                            <Badge style={{ width: 155 }} active>
+                                                {appointment.date
+                                                    .split('-')
+                                                    .reverse()
+                                                    .join('-')} - {appointment.time}
+                                            </Badge>
+                                            <Badge color="green">{appointment.price} Р</Badge>
+                                        </AppointmentCardRow>
+                                    </AppointmentCard>
+                                </Swipeable>
+                            )
+                        )
                     )}
                 </ScrollView>
             </PatientAppointments>

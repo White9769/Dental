@@ -27,8 +27,6 @@ const HomeScreen = props => {
 
   useEffect(fetchAppointments, []);
 
-  useEffect(fetchAppointments, [navigation.state.params]);
-
   const removeAppointment = id => {
     Alert.alert(
         'Удаление приема',
@@ -69,9 +67,9 @@ const HomeScreen = props => {
                     <Swipeable
                         rightButtons={[
                           <SwipeViewButton
-                              /*onPress={navigation.navigate.bind(this, 'EditAppointment', {
-                                  appointmentId: navigation.getParam('appointment', {})._id
-                              })}*/
+                              onPress={navigation.navigate.bind(this, 'EditAppointment', {
+                                  appointmentId: item._id,
+                              })}
                               style={{ backgroundColor: '#B4C1CB' }}>
                             <Ionicons name="md-create" size={28} color="white" />
                           </SwipeViewButton>,

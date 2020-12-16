@@ -46,7 +46,7 @@ const EditAppointmentScreen = ({ navigation }) => {
         appointmentsApi
             .update({id: appointmentId, values})
             .then(() => {
-                navigation.navigate('Home', { lastUpdate: new Date() });
+                navigation.push('Home');
             })
             .catch(e => {
                 if (e.response.data && e.response.data.message) {
@@ -64,7 +64,7 @@ const EditAppointmentScreen = ({ navigation }) => {
                 <Label>Номер зуба</Label>
                 <Input
                     onChange={handleInputChange.bind(this, 'dentNumber')}
-                    value={values.dentNumber}
+                    value={values.dentNumber.toString()}
                     style={{ marginTop: 12 }}
                     keyboardType="numeric"
                     autoFocus
@@ -74,7 +74,7 @@ const EditAppointmentScreen = ({ navigation }) => {
                 <Label>Цена</Label>
                 <Input
                     onChange={handleInputChange.bind(this, 'price')}
-                    value={values.price}
+                    value={values.price.toString()}
                     keyboardType="numeric"
                     style={{ marginTop: 12 }}
                 />

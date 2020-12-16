@@ -27,8 +27,6 @@ const HomeScreen = props => {
 
   useEffect(fetchAppointments, []);
 
-  useEffect(fetchAppointments, [navigation.state.params]);
-
   const removeAppointment = id => {
     Alert.alert(
         'Удаление приема',

@@ -30,6 +30,10 @@ const EditAppointmentScreen = ({ navigation }) => {
         fetchAppointmentInfo();
     }, []);
 
+    useEffect(() => {
+        fetchAppointmentInfo();
+    }, [navigation.state])
+
     const setFieldValue = (name, value) => {
         setValues({
             ...values,

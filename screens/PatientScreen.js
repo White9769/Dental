@@ -78,7 +78,7 @@ const PatientScreen = ({ navigation }) => {
 
                 <PatientButtons>
                     <FormulaButtonView>
-                        <Button  onPress={navigation.navigate.bind(this, 'DentalSnapshot')}>Снимки зубов</Button>
+                        <Button  onPress={navigation.navigate.bind(this, 'DentalSnapshot')}>Снимок зубов</Button>
                     </FormulaButtonView>
                     <PhoneButtonView>
                         <Button

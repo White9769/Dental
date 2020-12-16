@@ -1,4 +1,3 @@
-//<img src={{"/assets/Zub.png"}} style={{height:100 ,width:100, flex:0.5, resizeMode:'contain'}} />
 import React, { useState } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { Text, View } from 'react-native';

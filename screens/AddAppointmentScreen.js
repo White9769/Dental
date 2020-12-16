@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { Text, View } from 'react-native';
 import { Item, Input, Label, Picker } from 'native-base';
@@ -39,11 +39,11 @@ const AddAppointmentScreen = ({ navigation }) => {
     setFieldValue(name, text);
   };
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     appointmentsApi
         .add(values)
         .then(() => {
-          navigation.navigate('Home', { lastUpdate: new Date() });
+          navigation.push('Home', { lastUpdate: new Date() });
         })
         .catch(e => {
           if (e.response.data && e.response.data.message) {
@@ -53,7 +53,7 @@ const AddAppointmentScreen = ({ navigation }) => {
             });
           }
         });
-  };
+  }, [navigation, values]);
 
   return (
       <Container>
@@ -87,7 +87,7 @@ const AddAppointmentScreen = ({ navigation }) => {
               selectedValue={values.diagnosis}
           >
               <Picker.Item label="Выберите услугу:" />
-            <Picker.Item label="лучение пульпита" value="лучение пульпита" />
+            <Picker.Item label="лечение пульпита" value="лечение пульпита" />
             <Picker.Item label="удаление зуба" value="удаление зуба" />
             <Picker.Item label="лечение кариеса" value="лечение кариеса" />
             <Picker.Item label="пломбирование зуба" value="пломбирование зуба" />

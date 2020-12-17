@@ -23,6 +23,7 @@ const AddPatientScreen = ({ navigation }) => {
     patientsApi
         .add(values)
         .then(() => {
+            setValues({});
             navigation.push('Patients')
         })
         .catch(e => {
